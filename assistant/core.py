@@ -9,6 +9,7 @@ Responsibilities:
 """
 import re
 
+# Валідація українських номерів телефонів
 def validate_phone(phone: str) -> bool:
     """Перевіряє правильність номера телефону українського формату."""
     if not phone or not isinstance(phone, str):
@@ -18,11 +19,13 @@ def validate_phone(phone: str) -> bool:
     pattern = r'^(\+?38)?0\d{9}$'
     return bool(re.match(pattern, cleaned_phone))
 
+# Валідація email адрес
 def validate_email(email: str) -> bool:
     """Перевіряє правильність email адреси."""
     pattern = r'^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
     return bool(re.match(pattern, email))
 
+# Нормалізація телефонів до стандартного формату
 def normalize_phone(phone: str) -> str:
     """Нормалізує номер телефону до стандартного формату +380XXXXXXXXX."""
     if not validate_phone(phone):
@@ -36,6 +39,7 @@ def normalize_phone(phone: str) -> str:
     else:
         raise ValueError("Неможливо нормалізувати номер телефону")
 
+# Обробка помилок вводу
 def input_error(func):
     """Decorator to handle input errors."""
     def inner(*args, **kwargs):
