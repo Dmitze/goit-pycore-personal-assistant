@@ -14,6 +14,8 @@ from assistant.notes.commands import register_note_commands
 from assistant.commands_enum import Command, COMMAND_HELP
 from assistant.notes.notebook import Notebook
 
+
+    
 COMMANDS = {
     Command.Contacts.ADD: None,
     Command.Contacts.CHANGE: None,
@@ -22,6 +24,8 @@ COMMANDS = {
     Command.Contacts.ADD_BIRTHDAY: None,
     Command.Contacts.SHOW_BIRTHDAY: None,
     Command.Contacts.BIRTHDAYS: None,
+    # додав команду пошуку контактів до реєстру команд
+    Command.Contacts.SEARCH: None,
     Command.Notes.ADD_NOTE: None,
     Command.Notes.EDIT_NOTE: None,
     Command.Notes.DELETE_NOTE: None,
@@ -33,10 +37,10 @@ COMMANDS = {
 def show_help():
     """Display help with all commands, parameters, and descriptions."""
     print("\n" + "=" * 70)
-    print("📚 Personal Assistant - Available Commands")
+    print(" Personal Assistant - Available Commands")
     print("=" * 70)
 
-    print("\n📞 Contact Management:")
+    print("\n Contact Management:")
     for cmd in Command.Contacts:
         help_info = COMMAND_HELP[cmd]
         print(help_info.format(cmd.value, width=45))
@@ -46,7 +50,7 @@ def show_help():
         help_info = COMMAND_HELP[cmd]
         print(help_info.format(cmd.value, width=45))
 
-    print("\n⚙️ General:")
+    print("\n General:")
     for cmd in Command.General:
         help_info = COMMAND_HELP[cmd]
         print(help_info.format(cmd.value, width=45))
@@ -59,7 +63,15 @@ def show_help():
 
 
 def main():
-    print("Welcome to the Personal Assistant!")
+    # додав привітання та список команд при старті
+    print("Ласкаво просимо до Персонального помічника!")
+    print("Доступні команди:")
+    
+    # виведення всіх доступних команд
+    for command in Command:
+        print(f"  {command.value}: {COMMAND_HELP[command].description}")
+    
+    print("\nПочніть роботу ввівши команду...")
 
     contacts = AddressBook()
     notes = Notebook()
